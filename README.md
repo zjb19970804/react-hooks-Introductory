@@ -36,7 +36,7 @@ const [timestamp, setTimestamp] = useState(() => moment(new Date()).add(1, 'd').
 - `useState` 可以接受一个参数来填充初始值， 该参数可以是一个函数，函数必须要有返回值，可以在获取初始值比较复杂的情况下使用
 - `useState` 返回两个值：第一个为状态值state，第二个为可以更新所绑定的state的方法
 
->** 更新状态的使用示例：**
+> ** 更新状态的使用示例：**
 ```
 //将count状态设置为2
 setCount(2)
