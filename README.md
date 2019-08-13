@@ -43,7 +43,9 @@ setCount(2)
 ```
 
 <br/>
+
 ## useReducer
+
 >useState的另一种方案
 
 ```
@@ -72,7 +74,9 @@ setCount(2)
 - `useReducer` 的适用场景如：state的逻辑较复杂、包含多个子值、依赖之前的state等。由于dispatch函数永远不变，相对于传递一个回调函数给子组件，dispatch的性能优化会好一些。
 
 <br/>
+
 ## useEffect
+
 > `useEffect` 就是一个 Effect Hook，给函数组件增加了操作副作用的能力。它跟 class 组件中的 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 具有相同的用途，只不过被合并成了一个 API
 
 ```
@@ -91,7 +95,9 @@ useEffect(() => {
 - 当依赖为空，且return一个函数时，将在该组件销毁时执行return出的函数，即 `componentWillUnmount`
 
 <br/>
+
 ## useCallback
+
 > 优化的回调方法
 
 ```
@@ -106,7 +112,9 @@ const memoizedCallback = useCallback(
 - 把回调函数及依赖项数组作为参数传入 `useCallback`，它将返回该回调函数的 memoized 版本，该回调函数仅在某个依赖项改变时才会更新。当你把回调函数传递给经过优化的并使用引用相等性去避免非必要渲染（例如 shouldComponentUpdate）的子组件时，它将非常有用。
 
 <br/>
+
 ## useMemo
+
 > 优化计算属性
 
 ```
@@ -117,7 +125,9 @@ const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 - 记住，传入 useMemo 的函数会在渲染期间执行。请不要在这个函数内部执行与渲染无关的操作，诸如副作用这类的操作属于 useEffect 的适用范畴，而不是 useMemo。
 
 <br/>
+
 ## useRef
+
 ```
 const refContainer = useRef(initialValue);
 ```
@@ -125,11 +135,13 @@ const refContainer = useRef(initialValue);
 - useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。返回的 ref 对象在组件的整个生命周期内保持不变。
 
 <br/>
+
 ## useLayoutEffect
 
 - 其与 useEffect 相同，但它会在所有的 DOM 变更之后同步调用 effect。可以使用它来读取 DOM 布局并同步触发重渲染
 
 <br/>
+
 ## 实现一个自定义可重用逻辑的Hook
 
 ```
