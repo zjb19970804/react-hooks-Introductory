@@ -16,11 +16,44 @@
 
 - **难以理解的 class**<br/>
 	除了代码复用和代码管理会遇到困难外，`class` 是学习 React 的一大屏障。你必须去理解 JavaScript 中 `this` 的工作方式，这与其他语言存在巨大差异。还不能忘记绑定事件处理器。没有稳定的语法提案，这些代码非常冗余。大家可以很好地理解 `props`，`state` 和自顶向下的数据流，但对 class 却一筹莫展。即便在有经验的 React 开发者之间，对于函数组件与 class 组件的差异也存在分歧，甚至还要区分两种组件的使用场景。class 不能很好的压缩，并且会使热重载出现不稳定的情况。
+	> 对比下面两段代码
+	```
+	class ProfilePage extends React.Component {
+	  showMessage = () => {
+		alert("Followed " + this.props.user);
+	  };
+	  handleClick = () => {
+		setTimeout(this.showMessage, 3000);
+	  };
+	  render() {
+		return <button onClick={this.handleClick}>Follow</button>;
+	  }
+	}
+	```
 
-## 注意事项
-- 只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。
+	>```
+	function ProfilePage(props) {
+	  const showMessage = () => {
+		alert("Followed " + props.user);
+	  };
+	  const handleClick = () => {
+		setTimeout(showMessage, 3000);
+	  };
+	  return <button onClick={handleClick}>Follow</button>;
+	}
+	```
+
+	**这两个组件都描述了同一个逻辑：点击按钮 3 秒后 alert 父级传入的用户名。**
+	**如果3秒之内，父组件的user值被改变了，上面两个alert分别弹出的是修改前的还是修改后的值？**
 
 <br/>
+
+|  | class | function |
+| :- | :-: | :-: |
+| 写法 | 复杂，继承自React.Componet,constructor中接受props参数，render中返回react片段 | 简单，直接接受props作为参数，return返回代码片段 |
+| state | 可以使用this.state,setState()等 | 无状态组件 |
+| 生命周期 | 有 | 无 |
+| 优点 | 可以提升性能，有些时候我们需要减少组件的渲染次数，我们就需要在组件内部用shouldComponentUpdate 方法来去判断，或者继承React.PureComponent 类（自动调用shouldComponentUpdate）来实现state和props的浅比较进行判断组件是否重新渲染。 | 无状态组件，更好的体现容器和表现分离，逻辑组件与UI展示组件的解耦 |
 
 ## useState
 
